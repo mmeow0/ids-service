@@ -9,11 +9,11 @@ import (
 )
 
 type TaskController struct {
-	TaskUsecase domain.TaskUsecase
+	TaskUsecase domain.PacketUsecase
 }
 
 func (tc *TaskController) Create(c *gin.Context) {
-	var task domain.Task
+	var task domain.Packet
 
 	err := c.ShouldBind(&task)
 	if err != nil {
@@ -21,14 +21,7 @@ func (tc *TaskController) Create(c *gin.Context) {
 		return
 	}
 
-	userID := c.GetString("x-user-id")
 	task.ID = primitive.NewObjectID()
-
-	task.UserID, err = primitive.ObjectIDFromHex(userID)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, domain.ErrorResponse{Message: err.Error()})
-		return
-	}
 
 	err = tc.TaskUsecase.Create(c, &task)
 	if err != nil {
@@ -42,9 +35,7 @@ func (tc *TaskController) Create(c *gin.Context) {
 }
 
 func (u *TaskController) Fetch(c *gin.Context) {
-	userID := c.GetString("x-user-id")
-
-	tasks, err := u.TaskUsecase.FetchByUserID(c, userID)
+	tasks, err := u.TaskUsecase.FetchAll(c)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, domain.ErrorResponse{Message: err.Error()})
 		return

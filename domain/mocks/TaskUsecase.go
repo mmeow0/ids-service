@@ -15,11 +15,11 @@ type TaskUsecase struct {
 }
 
 // Create provides a mock function with given fields: c, task
-func (_m *TaskUsecase) Create(c context.Context, task *domain.Task) error {
+func (_m *TaskUsecase) Create(c context.Context, task *domain.Packet) error {
 	ret := _m.Called(c, task)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(context.Context, *domain.Task) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *domain.Packet) error); ok {
 		r0 = rf(c, task)
 	} else {
 		r0 = ret.Error(0)
@@ -28,22 +28,22 @@ func (_m *TaskUsecase) Create(c context.Context, task *domain.Task) error {
 	return r0
 }
 
-// FetchByUserID provides a mock function with given fields: c, userID
-func (_m *TaskUsecase) FetchByUserID(c context.Context, userID string) ([]domain.Task, error) {
-	ret := _m.Called(c, userID)
+// FetchAll provides a mock function with given fields: c, userID
+func (_m *TaskUsecase) FetchAll(c context.Context) ([]domain.Packet, error) {
+	ret := _m.Called(c)
 
-	var r0 []domain.Task
-	if rf, ok := ret.Get(0).(func(context.Context, string) []domain.Task); ok {
-		r0 = rf(c, userID)
+	var r0 []domain.Packet
+	if rf, ok := ret.Get(0).(func(context.Context) []domain.Packet); ok {
+		r0 = rf(c)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).([]domain.Task)
+			r0 = ret.Get(0).([]domain.Packet)
 		}
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(context.Context, string) error); ok {
-		r1 = rf(c, userID)
+	if rf, ok := ret.Get(1).(func(context.Context) error); ok {
+		r1 = rf(c)
 	} else {
 		r1 = ret.Error(1)
 	}

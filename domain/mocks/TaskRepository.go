@@ -15,11 +15,11 @@ type TaskRepository struct {
 }
 
 // Create provides a mock function with given fields: c, task
-func (_m *TaskRepository) Create(c context.Context, task *domain.Task) error {
+func (_m *TaskRepository) Create(c context.Context, task *domain.Packet) error {
 	ret := _m.Called(c, task)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(context.Context, *domain.Task) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *domain.Packet) error); ok {
 		r0 = rf(c, task)
 	} else {
 		r0 = ret.Error(0)
@@ -28,16 +28,16 @@ func (_m *TaskRepository) Create(c context.Context, task *domain.Task) error {
 	return r0
 }
 
-// FetchByUserID provides a mock function with given fields: c, userID
-func (_m *TaskRepository) FetchByUserID(c context.Context, userID string) ([]domain.Task, error) {
+// FetchAll provides a mock function with given fields: c, userID
+func (_m *TaskRepository) FetchAll(c context.Context, userID string) ([]domain.Packet, error) {
 	ret := _m.Called(c, userID)
 
-	var r0 []domain.Task
-	if rf, ok := ret.Get(0).(func(context.Context, string) []domain.Task); ok {
+	var r0 []domain.Packet
+	if rf, ok := ret.Get(0).(func(context.Context, string) []domain.Packet); ok {
 		r0 = rf(c, userID)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).([]domain.Task)
+			r0 = ret.Get(0).([]domain.Packet)
 		}
 	}
 
