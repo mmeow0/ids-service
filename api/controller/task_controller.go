@@ -35,6 +35,7 @@ func (tc *TaskController) Create(c *gin.Context) {
 }
 
 func (u *TaskController) Fetch(c *gin.Context) {
+	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 	tasks, err := u.TaskUsecase.FetchAll(c)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, domain.ErrorResponse{Message: err.Error()})
